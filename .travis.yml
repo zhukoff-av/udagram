@@ -38,3 +38,20 @@ before_install:
 
 install:
   - docker-compose -f ./docker-compose-build.yaml build --parallel
+    # Build
+    - docker build -t udagram-api-feed ./udagram-api-feed
+    - docker build -t udagram-api-user ./udagram-api-user
+    - docker build -t udagram-frontend ./udagram-frontend
+    - docker build -t udagram-reverseproxy ./udagram-reverseproxy
+    # Tagging
+    - docker tag udagram-api-feed anzhukov/udagram-api-feed:v1
+    - docker tag udagram-api-user anzhukov/udagram-api-user:v1
+    - docker tag udagram-frontend anzhukov/udagram-frontend:v1
+    - docker tag udagram-reverseproxy anzhukov/udagram-reverseproxy:v1
+    # Push
+    # Assuming DOCKER_PASSWORD and DOCKER_USERNAME are set in the Travis repository settings
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push anzhukov/udagram-api-feed:v1
+    - docker push anzhukov/udagram-api-user:v1
+  - docker push anzhukov/udagram-frontend:v1
+  - docker push anzhukov/udagram-reverseproxy:v1
