@@ -24,7 +24,7 @@ language: minimal
 services: docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.24.1
+  - DOCKER_COMPOSE_VERSION=1.23.2
 
 before_install:
   - docker -v && docker-compose -v
@@ -37,14 +37,4 @@ before_install:
   - sudo mv ./kubectl /usr/local/bin/kubectl
 
 install:
-  - docker-compose -f deployment/docker/docker-compose-build.yaml build --parallel
-
-deploy:
-  - provider: script
-    script: bash deployment/docker/publish.sh
-    on:
-      branch: master
-  - provider: script
-    script: bash deployment/k8s/deploy.sh
-    on:
-      branch: master
+  - docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml build --parallel
