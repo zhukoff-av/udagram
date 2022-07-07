@@ -1,5 +1,3 @@
-## Assuming the .travis.yml file is in the project directory, and there is a separate sub-directory for each service
-## Use either `docker-compose` or individual `docker build` commands
 ## Build
 #- docker build -t udagram-api-feed ./udagram-api-feed
 #- docker build -t udagram-api-user ./udagram-api-user
@@ -17,7 +15,6 @@
 #- docker push anzhukov/udagram-api-user:v1
 #- docker push anzhukov/udagram-frontend:v1
 #- docker push anzhukov/udagram-reverseproxy:v1
-
 
 language: minimal
 
